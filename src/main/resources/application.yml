@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: catalog
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/catalog}
+    username: ${DB_USERNAME:catalog}
+    password: ${DB_PASSWORD:catalog}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: 6379
+  threads:
+    virtual:
+      enabled: true
+
+catalog:
+  simulated-db-latency: 50ms
+  cache:
+    products:
+      redis-ttl: 10m
+      local-ttl: 30s
+    listing-ttl: 60s
+    xfetch-beta: 1.0
+  views:
+    flush-interval: 5s
+  rate-limit:
+    capacity: 20
+    refill-per-second: 10
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true

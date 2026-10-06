@@ -1,0 +1,6 @@
+catalog:
+  simulated-db-latency: 50ms
+  views:
+    flush-interval: 1h   # flushed explicitly by the tests
+  rate-limit:
+    capacity: 100000
